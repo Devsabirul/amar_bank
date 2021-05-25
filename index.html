@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amar bank</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="login_area">
+        <div class="row heading">
+            <h1 class="col-12 text-center">WELCOME TO AMAR BANK</h1>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div  id="form_area">
+                <div class="mb-3">
+                    <h1>Login</h1>
+                     <input type="email" placeholder="Email" class="form-control">
+                   </div>
+                   <div class="mb-3">
+                     <input type="password" placeholder="Password" class="form-control" >
+                   </div>
+                   <button id="btn-1" class="btn btn-primary">Enter</button>
+            </div>
+        </div>
+      </div>
+
+      <section id="container">
+          <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="depositArea status">
+                      <h3>Deposit</h3>
+                      <h1>$ <span id="depositCurrent">00</span></h1>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                  <div class="withdrawArea status">
+                      <h3>Withdraw</h3>
+                      <h1>$ <span id="withdrawCurrentAmount">00</span></h1>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-12 ">
+                  <div class="balanceArea status">
+                      <h3>Balance</h3>
+                      <h1>$ <span id="balanceCurrent">1240</span></h1>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="container">
+            <div id="containerInput" class="row">
+                <div class="col-lg-6 col-md-12">
+                  <div id="inputBox">
+                      <h1>Deposit</h1>
+                      <input type="text" id="depositInput" class="form-control" placeholder="$ amount you want to deposit">
+                      <button id="deposit-btn" class="btn btn-primary">Deposit</button>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div id="inputBox">
+                      <h1>Withdraw</h1>
+                      <input type="text" id="withdrawInput" class="form-control" placeholder="$ amount you want to Withdraw">
+                      <button id="withdraw-btn" class="btn btn-primary">Withdraw</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </section> 
+      <footer id="footer_text"><p class="text-center">©2020. Panda Commerce. All rights reserved. Shishir.</p></footer>
+      
+    <!-- script link -->
+    <script>
+        alert("You can login without Email and Password");
+        //login button event handler
+        document.getElementById('btn-1').addEventListener('click',function(){
+            const loginArea = document.getElementById("login_area");
+            loginArea.style.display = "none";
+            const container_area = document.getElementById('container');
+            container_area.style.display = "block";
+            const footerArea = document.getElementById('footer_text');
+            footerArea.style.display = "block";
+        })
+        //Deposit and withdraw button function 
+        function getInputNumber(id){
+            const amount = document.getElementById(id).value;
+            const amountNum = parseFloat(amount);
+            return amountNum;
+        }
+        function updateSpanText(id, depositNum){
+            const currentBalance = document.getElementById(id).innerText;
+            const currentBalanceNumber = parseFloat(currentBalance);
+            const currentBalanceTotal = depositNum + currentBalanceNumber;
+            document.getElementById(id).innerText= currentBalanceTotal;
+        }
+        function removeInput(id){
+            document.getElementById(id).value="";
+        }
+        //Deposit button event handler 
+        document.getElementById("deposit-btn").addEventListener('click',function(){
+            const depositNum = getInputNumber('depositInput');
+            updateSpanText("depositCurrent",depositNum);
+            updateSpanText("balanceCurrent",depositNum);
+            removeInput('depositInput');
+        })
+        //withdraw button event handler
+        document.getElementById("withdraw-btn").addEventListener('click',function(){
+
+            const withdrawNum = getInputNumber('withdrawInput');
+            updateSpanText("withdrawCurrentAmount",withdrawNum);
+            updateSpanText("balanceCurrent", -1 * withdrawNum);
+            removeInput('withdrawInput');
+        })
+        //for negative value type -1 *  
+    </script>
+</body>
+</html>
