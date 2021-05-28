@@ -72,7 +72,7 @@
       
     <!-- script link -->
     <script>
-        alert("You can login without Email and Password");
+        // alert("You can login without Email and Password");
         //login button event handler
         document.getElementById('btn-1').addEventListener('click',function(){
             const loginArea = document.getElementById("login_area");
@@ -100,9 +100,14 @@
         //Deposit button event handler 
         document.getElementById("deposit-btn").addEventListener('click',function(){
             const depositNum = getInputNumber('depositInput');
-            updateSpanText("depositCurrent",depositNum);
-            updateSpanText("balanceCurrent",depositNum);
-            removeInput('depositInput');
+
+            if(depositNum <0 ){
+                alert("Deposit Number cannot be negative")
+            }else{
+                updateSpanText("depositCurrent",depositNum);
+                updateSpanText("balanceCurrent",depositNum);
+                removeInput('depositInput');
+            }
         })
         //withdraw button event handler
         document.getElementById("withdraw-btn").addEventListener('click',function(){
